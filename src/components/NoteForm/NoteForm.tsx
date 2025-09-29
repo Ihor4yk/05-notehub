@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import css from "./NoteForm.module.css";
 import { useId } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNote } from "../services/noteService";
+import { createNote } from "../../services/noteService";
 
 interface NoteFormProps {
   onSuccess: () => void;
