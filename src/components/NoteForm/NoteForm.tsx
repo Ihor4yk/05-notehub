@@ -4,21 +4,16 @@ import css from "./NoteForm.module.css";
 import { useId } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "../../services/noteService";
+import { type CreateNoteRequest, type NoteTag } from "../../types/note";
 
 interface NoteFormProps {
   onSuccess: () => void;
 }
 
-interface NoteFormValues {
-  title: string;
-  content: string;
-  tag: string;
-}
-
-const initialValues: NoteFormValues = {
+const initialValues: CreateNoteRequest = {
   title: "",
   content: "",
-  tag: "",
+  tag: "" as unknown as NoteTag,
 };
 
 const validationSchema = Yup.object({
@@ -46,8 +41,8 @@ export default function NoteForm({ onSuccess }: NoteFormProps) {
   });
 
   const handleSubmit = (
-    values: NoteFormValues,
-    actions: FormikHelpers<NoteFormValues>
+    values: CreateNoteRequest,
+    actions: FormikHelpers<CreateNoteRequest>
   ) => {
     createMutation.mutate(values);
     actions.resetForm();
